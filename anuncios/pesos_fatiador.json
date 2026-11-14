@@ -1,0 +1,4 @@
+{"espiral": {"PLA": 46.11, "PETG": 47.23, "tempo_PLA": "1h27", "tempo_PETG": "1h35"},
+ "concentrica": {"PLA": 36.31, "PETG": 37.19, "tempo_PLA": "1h20", "tempo_PETG": "1h24"},
+ "facetada": {"PLA": 51.84, "PETG": 53.09, "tempo_PLA": "1h23", "tempo_PETG": "1h40"},
+ "vazada": {"PLA": 41.45, "PETG": 42.45, "tempo_PLA": "2h00", "tempo_PETG": "2h04"}}
