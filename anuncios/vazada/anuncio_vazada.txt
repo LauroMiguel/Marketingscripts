@@ -1,0 +1,140 @@
+ANÚNCIO 3 - ESTRELA VAZADA COLMEIA
+Prioridade: SEGUNDA LEVA (depois das primeiras vendas)
+Arquivo da peça: estrelas/estrela_vazada.stl
+Imagens: anuncios/vazada/imagens/
+
+==================================================================
+1. TÍTULO (colar exatamente; 55 de 60 caracteres)
+==================================================================
+Ponteira Estrela Árvore De Natal Colmeia Vazada 21cm 3d
+
+(Não coloque a cor no título: as cores vão como VARIAÇÕES.)
+
+==================================================================
+2. CATEGORIA SUGERIDA
+==================================================================
+Casa, Móveis e Decoração > Enfeites e Decoração da Casa > Árvores e Enfeites de Natal > Enfeites para Árvores
+(O Mercado Livre sugere a categoria sozinho ao ler o título. Se aparecer
+uma categoria específica de "Ponteiras", prefira ela. Não consegui
+confirmar o nome exato da categoria; confira na hora de anunciar.)
+
+==================================================================
+3. TIPO DE ANÚNCIO E PREÇO
+==================================================================
+Tipo: Clássico
+Preço de lançamento: R$ 44,90 (todas as cores pelo mesmo preço)
+Condição: Novo
+Envio: Mercado Envios, com o frete grátis que o Mercado Livre oferece na faixa de preço
+Pacote para informar: 25 x 23 x 6 cm, 0,15 kg (confira após embalar a primeira)
+Garantia: Garantia do vendedor, 90 dias
+Veja planilha_precos.xlsx para custo e sobra por venda.
+
+==================================================================
+4. VARIAÇÕES (atributo "Cor")
+==================================================================
+Cor: Dourado   | Material: PLA  | Fotos: 01_capa_dourado.png + fotos comuns
+Cor: Vermelho  | Material: PETG | Fotos: 01_capa_vermelho.png + fotos comuns
+Cor: Azul      | Material: PETG | Fotos: 01_capa_azul.png + fotos comuns
+Estoque de cada variação: comece com 3 (ver nota sobre estoque no LEIA-ME).
+Fotos comuns (nesta ordem, depois da capa da cor):
+ 02_cores.png, 03_angulo_mesa.png, 04_lateral.png, 05_costas.png,
+ 06_detalhe_haste.png, 07_medidas.png, 08_encaixe.png
+
+==================================================================
+5. FICHA TÉCNICA
+==================================================================
+Marca: Genérica (ou o nome da sua loja, se tiver)
+Modelo: Colmeia
+Tipo de enfeite: Ponteira / estrela para topo de árvore
+Formato: Estrela
+Material: PLA (cor dourada) / PETG (cores vermelha e azul) - plástico impresso em 3D
+Cor: Dourado, Vermelho ou Azul (uma cor por peça)
+Largura: 19,0 cm
+Altura: 21,1 cm (incluindo a haste)
+Espessura: 2,0 cm no máximo; 0,4 cm na colmeia, 0,6 cm na moldura, 0,8 cm no miolo (a haste tem 2,0 cm)
+Peso aproximado: 41 g (dourado) / 42 g (vermelho e azul)
+Encaixe: haste com furo interno de 1,5 cm de diâmetro e 5,5 cm de profundidade
+Com luz: Não
+Unidades por kit: 1
+Código universal (GTIN): marque "O produto não tem código cadastrado"
+
+==================================================================
+6. DESCRIÇÃO (texto simples - copiar e colar)
+==================================================================
+PONTEIRA DE ESTRELA PARA ÁRVORE DE NATAL - MODELO COLMEIA
+
+Moldura de estrela preenchida por uma trama de hexágonos (colmeia), com uma estrela menor em relevo no centro. É o maior modelo da linha (21 cm de altura) e o que mais aparece de longe na árvore. O vazado deixa a luz passar.
+
+Peça produzida por impressão 3D, sob encomenda, em uma única cor.
+
+MEDIDAS
+- Largura: 19,0 cm
+- Altura: 21,1 cm (com a haste)
+- Espessura máxima: 2,0 cm
+- Peso aproximado: 41 g (dourado) / 42 g (vermelho e azul)
+
+ENCAIXE
+- A estrela tem uma haste com furo interno de 1,5 cm de diâmetro e 5,5 cm de profundidade.
+- Serve em pontas de árvore com até cerca de 1,4 cm de espessura.
+- Se a ponta da sua árvore for mais fina, enrole fita ou papel na ponta para firmar.
+- Se a ponta for mais grossa que 1,5 cm, a estrela não vai encaixar. Meça antes de comprar.
+
+CORES
+- Dourado: plástico PLA
+- Vermelho: plástico PETG
+- Azul: plástico PETG
+
+O QUE VOCÊ PRECISA SABER
+- As imagens do anúncio são ilustrativas, feitas em 3D a partir do modelo exato da peça. A peça real tem o mesmo formato e medidas, mas por ser impressa em 3D apresenta linhas finas de camada na superfície, principalmente nas laterais, e o tom da cor pode variar um pouco.
+- As costas da estrela são planas e lisas.
+- A trama de colmeia tem linhas de cerca de 2 mm de largura. É resistente ao uso normal, mas é a peça mais delicada da linha: manuseie pela moldura.
+- Peça decorativa para uso interno. Não deixe no sol forte, dentro de carro ou perto de fontes de calor: o plástico pode deformar com calor.
+- Não acompanha luz, árvore nem enfeites.
+- Não é brinquedo.
+
+PRAZO
+Produto feito sob encomenda: a peça é fabricada depois da compra. O prazo de fabricação está informado no anúncio e é somado ao prazo de entrega.
+
+CONTEÚDO DA EMBALAGEM
+1 ponteira de estrela na cor escolhida.
+
+==================================================================
+7. PRAZO DE FABRICAÇÃO
+==================================================================
+Informe 3 dias úteis no campo de disponibilidade/prazo de fabricação
+(o nome do campo varia entre o app e o site). Cada peça leva cerca de
+1h20 a 2h de impressão; 3 dias dão folga para uma falha e reimpressão.
+Se acumular muitos pedidos, aumente o prazo ANTES de atrasar.
+
+==================================================================
+8. RESPOSTAS PRONTAS PARA PERGUNTAS FREQUENTES
+==================================================================
+P: Serve na minha árvore?
+R: Olá! A haste tem um furo de 1,5 cm de diâmetro e 5,5 cm de profundidade. Serve em pontas de até cerca de 1,4 cm de espessura. Se puder, meça a ponta da sua árvore; se for mais fina, dá para firmar enrolando um pouco de fita. Qualquer dúvida, estou à disposição!
+
+P: Qual o tamanho?
+R: Olá! Ela tem 19,0 cm de largura e 21,1 cm de altura, já contando a haste. A espessura máxima é de 2,0 cm. Obrigado pelo contato!
+
+P: Tem luz / acende?
+R: Olá! Não, a estrela não tem luz. É uma peça decorativa de plástico. Obrigado!
+
+P: A foto é real?
+R: Olá! As imagens são ilustrações em 3D feitas a partir do modelo exato da peça, com as mesmas medidas e formato. Na peça real aparecem linhas finas de impressão 3D na superfície. Obrigado pela pergunta!
+
+P: Quanto tempo demora para chegar? Chega antes do Natal?
+R: Olá! A peça é feita sob encomenda: são até 3 dias úteis de fabricação mais o prazo do frete, que aparece no anúncio para o seu CEP. Para garantir antes do Natal, recomendo comprar com antecedência. Obrigado!
+
+P: Tem em outra cor (prata, branco, verde...)?
+R: Olá! No momento temos apenas dourado, vermelho e azul. Obrigado pelo interesse!
+
+P: É de que material? Quebra fácil?
+R: Olá! O dourado é de PLA e o vermelho e o azul são de PETG, plásticos usados em impressão 3D. É resistente para o uso normal na árvore, mas, como toda peça decorativa, pode quebrar se cair ou for forçada. Obrigado!
+
+P: Pode deixar na área externa / no sol?
+R: Olá! Recomendamos uso interno. O sol forte e o calor podem deformar o plástico. Obrigado!
+
+P: Vocês fazem maior / personalizado / com nome?
+R: Olá! No momento vendemos somente este modelo, neste tamanho. Obrigado pelo interesse!
+
+P: Emite nota fiscal?
+R: (Responda conforme a sua situação. Se não tiver MEI/CNPJ, não prometa nota fiscal.)

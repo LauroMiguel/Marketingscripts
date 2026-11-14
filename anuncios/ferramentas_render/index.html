@@ -1,0 +1,135 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>render</title>
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import {STLLoader} from 'three/addons/loaders/STLLoader.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
+
+const SIZE = 2400;
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(SIZE, SIZE);
+renderer.setClearColor(0xffffff, 0);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+// Cores reais do estoque
+const MATS = {
+  dourado: () => new THREE.MeshPhysicalMaterial({color:0xd9aa3c, metalness:0.42, roughness:0.34, clearcoat:0.2, clearcoatRoughness:0.4, envMapIntensity:1.35}),
+  vermelho: () => new THREE.MeshPhysicalMaterial({color:0x9c0b14, metalness:0.0, roughness:0.28, clearcoat:0.45, clearcoatRoughness:0.25, envMapIntensity:0.9}),
+  azul: () => new THREE.MeshPhysicalMaterial({color:0x1747b0, metalness:0.0, roughness:0.28, clearcoat:0.45, clearcoatRoughness:0.25, envMapIntensity:0.9}),
+};
+
+const loader = new STLLoader();
+const cache = {};
+async function geom(name){
+  if(cache[name]) return cache[name];
+  const g = await loader.loadAsync('./stl/'+name+'.stl');
+  g.computeBoundingBox();
+  const bb = g.boundingBox;
+  const c = new THREE.Vector3(); bb.getCenter(c);
+  g.translate(-c.x, -c.y, -c.z);              // centra na origem
+  const g2 = toCreasedNormals(g, Math.PI/7);  // suaviza o cilindro do furo, mantem arestas vivas
+  g2.computeBoundingBox();
+  cache[name] = {g:g2, center:c, size:bb.getSize(new THREE.Vector3())};
+  return cache[name];
+}
+
+function lights(scene, shadow, fillI=0.9){
+  scene.environment = envTex;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xe8e2d8, 0.9));
+  const fill = new THREE.DirectionalLight(0xffffff, fillI);
+  fill.position.set(-60, 40, 600); scene.add(fill);
+  const key = new THREE.DirectionalLight(0xffffff, 1.6);
+  key.position.set(250, 420, 380);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xfff4e0, 0.7);
+  rim.position.set(-350, 150, -200);
+  scene.add(rim);
+  if(shadow){
+    key.castShadow = true;
+    key.shadow.mapSize.set(4096,4096);
+    const s = key.shadow.camera; s.left=-300; s.right=300; s.top=300; s.bottom=-300; s.near=10; s.far=1500;
+    key.shadow.radius = 8; key.shadow.bias = -0.0005;
+  }
+  return key;
+}
+
+// opts: {model, cor, view, ortho}
+window.shot = async function(opts){
+  const {g, center, size} = await geom(opts.model);
+  const scene = new THREE.Scene();
+  const table = opts.view === 'mesa';
+  renderer.toneMappingExposure = opts.exposure ?? 1.0;
+  const key = lights(scene, table || opts.view==='arvore', opts.fill ?? 0.9);
+  const mesh = new THREE.Mesh(g, MATS[opts.cor]());
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  const grp = new THREE.Group(); grp.add(mesh); scene.add(grp);
+
+  const v = opts.view;
+  if(v==='frente3q'){ grp.rotation.set(0.10, -0.38, 0); }
+  else if(v==='frente'){ grp.rotation.set(0,0,0); }
+  else if(v==='lateral'){ grp.rotation.set(0.15, -0.80, 0); }
+  else if(v==='costas'){ grp.rotation.set(0.08, Math.PI+0.35, 0); }
+  else if(v==='lado_ortho'){ grp.rotation.set(0, Math.PI/2, 0); }
+  else if(v==='detalhe'){ grp.rotation.set(-0.55, -0.45, 0); }
+  else if(v==='mesa'){
+    grp.rotation.set(-Math.PI/2, 0, 0.55);       // deitada, face da frente para cima
+    grp.position.y = size.z/2;
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(3000,3000), new THREE.ShadowMaterial({opacity:0.16}));
+    plane.rotation.x = -Math.PI/2; plane.receiveShadow = true; scene.add(plane);
+    key.position.set(120, 600, 260);
+  }
+  else if(v==='arvore'){
+    grp.rotation.set(0.06, -0.30, 0);
+    // ponta da arvore (ilustrativa): haste de 13 mm entrando no furo e galhos em cone
+    const yBase = -size.y/2;                      // base da haste
+    const zFuro = 10 - center.z;                  // eixo do furo (z = 10 mm no STL)
+    const tree = new THREE.Group();
+    const verde = new THREE.MeshStandardMaterial({color:0x1d5a34, roughness:0.85});
+    const ponta = new THREE.Mesh(new THREE.CylinderGeometry(6.5,6.5,140,32), new THREE.MeshStandardMaterial({color:0x2a6b3f, roughness:0.7}));
+    ponta.position.set(0, yBase + 45 - 70, zFuro); tree.add(ponta);
+    const camadas = [[yBase-30, 90, 58],[yBase-95, 110, 88]];
+    for(const [top,h,r] of camadas){
+      const cone = new THREE.Mesh(new THREE.ConeGeometry(r, h, 48, 1, true), verde);
+      cone.position.set(0, top - h/2, zFuro); tree.add(cone);
+    }
+    const bolas = [[-30,-85,0xd9aa3c],[34,-105,0xb5121b],[-55,-160,0xb5121b],[52,-175,0xd9aa3c],[0,-140,0x1747b0]];
+    for(const [x,dy,c] of bolas){
+      const b = new THREE.Mesh(new THREE.SphereGeometry(9,32,16), new THREE.MeshPhysicalMaterial({color:c, metalness:0.3, roughness:0.2, clearcoat:0.6}));
+      b.position.set(x, yBase+dy, zFuro + 0.55*Math.abs(x)*0 + 30); tree.add(b);
+    }
+    grp.add(tree);
+  }
+
+  let cam;
+  const ext = Math.max(size.x, size.y, size.z) * (v==='arvore'?2.6:1.6);
+  if(opts.ortho){
+    cam = new THREE.OrthographicCamera(-ext/2, ext/2, ext/2, -ext/2, 1, 5000);
+    cam.position.set(0, 0, 2000); cam.lookAt(0,0,0);
+  } else if(table){
+    cam = new THREE.PerspectiveCamera(22, 1, 10, 6000);
+    cam.position.set(0, 560, 640); cam.lookAt(0, 0, 0);
+  } else {
+    cam = new THREE.PerspectiveCamera(20, 1, 10, 6000);
+    const d = (v==='arvore'? 2.0 : 1.0) * 900;
+    cam.position.set(0, 0, d); cam.lookAt(0, v==='arvore'? -size.y*0.8 : 0, 0);
+  }
+  renderer.render(scene, cam);
+  const url = renderer.domElement.toDataURL('image/png');
+  scene.traverse(o=>{ if(o.material && o!==mesh) o.material.dispose?.(); if(o.geometry && o!==mesh) o.geometry.dispose?.(); });
+  return url;
+};
+window.ready = true;
+</script></body></html>
