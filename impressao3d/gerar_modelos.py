@@ -60,3 +60,38 @@ for n in (sys.argv[1:] or ["Maria","Joao","Ana"]):
     enfeite_nome(n); chaveiro(n)
 for f in __import__("glob").glob(OUT+"*.stl"):
     mm = trimesh.load(f); print(f, "estanque:", mm.is_watertight, "volume cm3: %.1f" % (mm.volume/1000), "tamanho mm:", np.round(mm.extents,1))
+
+# ===== Linha de Natal extra =====
+from shapely import affinity
+# 5) Tag de presente com nome ("PARA: NOME") - furo para fita
+def tag_presente(nome):
+    base = Polygon([(-30,-14),(22,-14),(32,0),(22,14),(-30,14)]).buffer(2,join_style=1).difference(Point(24,0).buffer(2.5))
+    t1 = text_poly("PARA:",5); t1 = affinity.translate(t1, -27-t1.bounds[0], 4)
+    t2 = text_poly(nome.upper(),9); esc=min(1,44/(t2.bounds[2]-t2.bounds[0])); t2=affinity.scale(t2,esc,esc,origin=(0,0))
+    t2 = affinity.translate(t2, -27-t2.bounds[0], -10-t2.bounds[1])
+    trimesh.boolean.union([ext(base,2), ext(t1.union(t2),1.2,1.99)]).export(OUT+f"tag_presente_{nome.lower()}.stl")
+
+# 6) Floco de neve (75 mm) - fica lindo em azul
+def floco():
+    b = box(-2,0,2,34)
+    for y,l in ((14,10),(24,7)):
+        for a in (45,-45):
+            b = b.union(affinity.translate(affinity.rotate(box(-1.5,0,1.5,l),a,origin=(0,0)),0,y))
+    s = unary_union([affinity.rotate(b,i*60,origin=(0,0)) for i in range(6)]).union(Point(0,0).buffer(7))
+    s = s.union(Point(0,37).buffer(4)).difference(Point(0,37).buffer(2))
+    ext(s,3).export(OUT+"floco_de_neve.stl")
+
+# 7) Ponteira de árvore (estrela grande de 120 mm, com encaixe por trás)
+def ponteira():
+    s = star(60,26).buffer(2,join_style=1)
+    est = ext(s,6)
+    tubo = trimesh.creation.cylinder(radius=11, height=55, sections=64); tubo.apply_transform(trimesh.transformations.rotation_matrix(math.pi/2,[1,0,0]))
+    furo = trimesh.creation.cylinder(radius=8.5, height=60, sections=64); furo.apply_transform(trimesh.transformations.rotation_matrix(math.pi/2,[1,0,0]))
+    tubo.apply_translation([0,-50,11]); furo.apply_translation([0,-50,11])
+    m = trimesh.boolean.difference([trimesh.boolean.union([est,tubo]), furo])
+    m.apply_translation([0,0,-m.bounds[0][2]]); m.export(OUT+"ponteira_estrela.stl")
+
+floco(); ponteira()
+for n in (sys.argv[1:] or ["Maria","Joao","Ana"]): tag_presente(n)
+for f in sorted(__import__("glob").glob(OUT+"*.stl")):
+    mm = trimesh.load(f); print(f, mm.is_watertight, "%.1f cm3"%(mm.volume/1000), np.round(mm.extents,1))
